@@ -1,6 +1,5 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { customerColumns, userRows } from "../../datatablesource";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
@@ -88,12 +87,6 @@ const Datatable = ({columns}) => {
 
   return (
     <div className="datatable">
-      <div className="datatableTitle">
-        Table
-        <Link to={ `/${path}/new`} className="link">
-          Add New
-        </Link>
-      </div>
       <DataGrid                                                   // material UI DataGrid
         className="datagrid"
         rows={data}                                               // passing data

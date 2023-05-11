@@ -48,12 +48,6 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/shops" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Shops</span>
-            </li>
-          </Link>
           <li>
             <ExitToAppIcon className="icon" />
             <span onClick={() => handleLogout()} >Logout</span>
