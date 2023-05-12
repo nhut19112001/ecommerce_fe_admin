@@ -2,8 +2,6 @@ import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -46,6 +44,12 @@ const Sidebar = () => {
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
+            </li>
+          </Link>
+          <Link to="/shops" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Shops</span>
             </li>
           </Link>
           <li>

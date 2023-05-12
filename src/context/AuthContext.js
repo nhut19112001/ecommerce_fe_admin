@@ -66,4 +66,3 @@ const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 };
 
 
-// https://stackoverflow.com/questions/69917833/cannot-access-object-values-from-usecontext-using-usereducer-and-usecontext-for

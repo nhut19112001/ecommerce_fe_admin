@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosClient from '../../api/axiosClient.js'
 import React from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import "./login.scss";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
-        username: undefined,
+        email: undefined,
         password: undefined,
     });    
 
@@ -23,26 +23,29 @@ const Login = () => {
     }
                                    
     const handleClick = async (e) => {
-        e.preventDefault();
-        dispatch({type:"LOGIN_START"}); //updating loading state
-        try{
-            const res = await axios.post("/auth/login", credentials);
-            console.log(res.data, "type", typeof res.data.details);
-            if(res.data.role === 0){
-              dispatch({type:"LOGIN_SUCCESS", payload: res.data.details })
-              navigate("/");
-            }else{
-              dispatch({type:"LOGIN_FAILURE", payload: {message: "You are not allowed!"}});
-            }
+      e.preventDefault();
+      dispatch({type: "LOGIN_START"}); // cập nhật trạng thái đang tải
+      try {
+        const res = await axiosClient.post("/auth/login", credentials);
+        //console.log(res.data, "type", typeof res.data.payload.user);
+        console.log("tessssssstttttt")
+        console.log(res.payload);
+        if (res.payload.user.isActive === true) {
+          dispatch({type: "LOGIN_SUCCESS", payload: res.payload.user});
+          navigate("/");
+        } else {
+          dispatch({type: "LOGIN_FAILURE", payload: {message: "Bạn không được phép!"}});
         }
-        catch(err){
-            dispatch({type:"LOGIN_FAILURE", payload:err.response.details});
-        }
-    } 
+      } catch (err) {
+        dispatch({type: "LOGIN_FAILURE", payload: err.response ? err.response.data : err.message});
+      }
+    }
+    
 
     console.log("logged in");
 
     return (
+      <body class="login-body">
       <div className="container">
         <h1>Admin Login</h1>
         <form>
@@ -76,6 +79,7 @@ const Login = () => {
           {error && <span>{error.message}</span>}
         </form>
       </div>
+    </body>
     );
     
 };

@@ -3,12 +3,14 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./style/dark.scss";
 import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import { userColumns } from "./datatablesource";
 
 function App() {
-
+  const { darkMode } = useContext(DarkModeContext);
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);
 
@@ -20,6 +22,7 @@ function App() {
   };
 
   return (
+    <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -50,9 +53,28 @@ function App() {
                 }
               />
             </Route>
+            <Route path="Shops">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={userColumns} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path=":userId"
+              element={
+                <ProtectedRoute>
+                  <Single />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
           </Route>
         </Routes>
       </BrowserRouter>
+    </div>
   );
 }
 
