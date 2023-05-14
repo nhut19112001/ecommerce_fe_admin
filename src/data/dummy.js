@@ -1,19 +1,8 @@
 import React from 'react';
-import { FiShoppingBag} from 'react-icons/fi';
 import { RiContactsLine} from 'react-icons/ri';
 
 
 export const links = [
-  {
-    title: 'Dashboard',
-    links: [
-      {
-        name: 'ecommerce',
-        icon: <FiShoppingBag />,
-      },
-    ],
-  },
-
   {
     title: 'Pages',
     links: [

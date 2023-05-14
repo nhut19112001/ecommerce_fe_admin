@@ -1,26 +1,30 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axiosClient from '../../api/axiosClient.js'
 
 const Datatable = ({columns}) => {
   
-  const location = useLocation();
-  const path = location.pathname.split("/")[1];
   const [list, setList] = useState();
-  const { data, loading, error } = useFetch(`/${path}`);
+  const { data, loading, error } = useFetch();
 
   useEffect(() => {
     setList(data);
   }, [data]);  // whenever data changes update list
 
-  const handleDelete = async (id) => {
+  const handleActivate = async (id, isActive) => {
     try {
-      if (window.confirm("Bạn chắc chắn muốn xóa thông tin này?")) {
-        await axiosClient.delete(`/${path}/${id}`);
-        setList(list.filter((item) => item._id !== id));
+      const confirmed = window.confirm(
+        `Are you sure you want to ${isActive ? "deactivate" : "activate"} this account?`
+      );
+      if (confirmed) {
+        await axiosClient.put(`user/updateActiveUser`, { user: id ,active: !isActive });
+        setList((prevList) =>
+          prevList.map((item) =>
+            item._id === id ? { ...item, active: !isActive } : item
+          )
+        );
       }
     } catch (err) {}
   };
@@ -31,14 +35,24 @@ const Datatable = ({columns}) => {
       headerName: "Action",
       width: 300,
       renderCell: (params) => {
+        const isActive = params.row.active;
         return (
           <div className="cellAction">
+          {isActive ? (
             <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
+              className="activateButton"
+              onClick={() => handleActivate(params.row._id, true)}
             >
-              Delete
+              Active
             </div>
+          ) : (
+            <div
+              className="deactivateButton"
+              onClick={() => handleActivate(params.row._id, false)}
+            >
+              Deactive
+            </div>
+          )}
           </div>
         );
       },
@@ -48,9 +62,9 @@ const Datatable = ({columns}) => {
 
   return (
     <div className="datatable">
-      <DataGrid                                                   // material UI DataGrid
+      <DataGrid                                                   
         className="datagrid"
-        rows={data}                                               // passing data
+        rows={data}                                              
         columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

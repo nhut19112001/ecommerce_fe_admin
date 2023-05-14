@@ -22,4 +22,9 @@ export const userColumns = [
     headerName: "Role",
     width: 100,
   },
+  {
+    field: "role",
+    headerName: "isActive",
+    width: 100,
+  },
 ];

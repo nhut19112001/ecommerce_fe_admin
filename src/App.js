@@ -71,7 +71,6 @@ const App = () => {
       <div>
         {themeSettings && <ThemeSettings />}
         <Routes>
-          <Route path="/" index element={<Ecommerce />} />
           <Route path="/user" index element={<List columns={userColumns} />} />
         </Routes>
       </div>
