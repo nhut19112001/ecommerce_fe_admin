@@ -1,8 +1,17 @@
 import React from 'react';
 import { RiContactsLine} from 'react-icons/ri';
-
+import { FiShoppingBag} from 'react-icons/fi';
 
 export const links = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'ecommerce',
+        icon: <FiShoppingBag />,
+      },
+    ],
+  },
   {
     title: 'Pages',
     links: [

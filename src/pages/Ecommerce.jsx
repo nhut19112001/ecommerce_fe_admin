@@ -6,6 +6,7 @@ const Ecommerce = () => {
 
   return (
     <div className="mt-24">
+    Welcome to admin panel !!!!
     </div>
   );
 };
