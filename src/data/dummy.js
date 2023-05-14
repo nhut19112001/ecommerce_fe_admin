@@ -18,7 +18,7 @@ export const links = [
     title: 'Pages',
     links: [
       {
-        name: 'customers',
+        name: 'user',
         icon: <RiContactsLine />,
       },
     ],

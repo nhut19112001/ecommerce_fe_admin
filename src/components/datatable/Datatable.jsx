@@ -8,7 +8,7 @@ import axiosClient from '../../api/axiosClient.js'
 const Datatable = ({columns}) => {
   
   const location = useLocation();
-  const path = "user";
+  const path = location.pathname.split("/")[1];
   const [list, setList] = useState();
   const { data, loading, error } = useFetch(`/${path}`);
 

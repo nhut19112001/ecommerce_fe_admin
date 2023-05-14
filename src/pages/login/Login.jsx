@@ -29,7 +29,7 @@ const Login = () => {
         //console.log(res.data, "type", typeof res.data.payload.user);
         console.log("tessssssstttttt")
         console.log(res.payload);
-        if (res.payload.user.isActive === true) {
+        if (res.payload.user.role === 0) {
           dispatch({type: "LOGIN_SUCCESS", payload: res.payload.user});
           navigate("/");
         } else {
