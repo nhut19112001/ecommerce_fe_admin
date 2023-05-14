@@ -5,9 +5,9 @@ import useFetch from "../../hooks/useFetch";
 import axiosClient from '../../api/axiosClient.js'
 
 const Datatable = ({columns}) => {
-  
+  const url = "/user/search"
   const [list, setList] = useState();
-  const { data, loading, error } = useFetch();
+  const { data, loading, error } = useFetch(url);
 
   useEffect(() => {
     setList(data);
