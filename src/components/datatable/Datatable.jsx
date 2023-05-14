@@ -10,8 +10,8 @@ const Datatable = ({columns}) => {
   const { data, loading, error } = useFetch(url);
 
   useEffect(() => {
-    setList(data);
-  }, [data]);  // whenever data changes update list
+    setList(data.payload);
+  }, [data.payload]);  // whenever data changes update list
 
   const handleActivate = async (id, isActive) => {
     try {
@@ -64,7 +64,7 @@ const Datatable = ({columns}) => {
     <div className="datatable">
       <DataGrid                                                   
         className="datagrid"
-        rows={data}                                              
+        rows={data.payload}                                              
         columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
