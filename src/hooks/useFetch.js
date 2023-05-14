@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axiosClient from "../api/axiosClient";
 
 // Custom Hooks
-const url = "/user"
+const url = "/user/searchUser"
 const useFetch = (url) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
